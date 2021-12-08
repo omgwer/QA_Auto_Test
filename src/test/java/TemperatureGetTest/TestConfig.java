@@ -1,7 +1,6 @@
 package TemperatureGetTest;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.*;
@@ -31,7 +30,7 @@ public class TestConfig {
     void searchCity() {
         $("div.search button.button-round").click();
         $("ul.search-dropdown-menu li").click();
-        Selenide.sleep(2000);
+        sleep(2000);
     }
 
     void selectTemperatureType(String type) {
@@ -41,14 +40,14 @@ public class TestConfig {
             $x("//div[text()=\"Metric: °C, m/s\"]").click();
         }
 
-        Selenide.sleep(2000);
+        sleep(2000);
     }
 
     void getCurrentTemp(String type, String city) {
-        SelenideElement element =  $x("//div[@class=\"current-temp\"]/span[@class=\"heading\"]");
+        SelenideElement element = $x("//div[@class=\"current-temp\"]/span[@class=\"heading\"]");
         if (type.equals("Imperial")) {
-           element.shouldHave(text("°F"));
-           System.out.println(city + " = " + element.text());
+            element.shouldHave(text("°F"));
+            System.out.println(city + " = " + element.text());
         } else {
             element.shouldHave(text("°C"));
             System.out.println(city + " = " + element.text());

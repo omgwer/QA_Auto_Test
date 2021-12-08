@@ -1,10 +1,22 @@
 package TemperatureGetTest;
-
+import org.testng.IRetryAnalyzer;
 import org.testng.annotations.Test;
+import org.testng.ITestResult;
 
-public class TemperatureGainTest {
+public class TemperatureGainTest implements IRetryAnalyzer {
+    private int retryCount = 0;
+    private final int maxRetryCount = 1;
 
-    @Test(testName = "Get City Temperature")
+    public boolean retry(ITestResult result) {
+
+        if (retryCount < maxRetryCount) {
+            retryCount++;
+            return true;
+        }
+        return false;
+    }
+
+    @Test(testName = "Get City Temperature", retryAnalyzer = TemperatureGainTest.class)
     public void getCityTempTest() {
         TestConfig getTemp = new TestConfig();
         String[] cityList = getTemp.cityList;

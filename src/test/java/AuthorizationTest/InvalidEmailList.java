@@ -20,11 +20,3 @@ public class InvalidEmailList {
             "Abc..123@example.com"
         };
 }
-
-
-
-
-
-
-
-
