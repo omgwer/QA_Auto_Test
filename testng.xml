@@ -4,6 +4,7 @@
     <test name="test1">
         <classes>
             <class name="AuthorizationTest.AuthorizationTesting"></class>
+            <class name="TemperatureGetTest.TemperatureGainTest"/>
         </classes>
     </test>
 </suite>
