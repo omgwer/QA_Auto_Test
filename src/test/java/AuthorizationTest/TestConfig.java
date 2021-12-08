@@ -12,6 +12,7 @@ public class TestConfig {
     private final String URL = "https://openweathermap.org/";
     private final String USER_EMAIL = "poceteh301@simdpi.com";
     private final String USER_PASSWORD = "testUser123";
+    private boolean firstRestore = false;
 
     TestConfig() {
         Configuration.timeout = TIMEOUT;
@@ -51,7 +52,7 @@ public class TestConfig {
         $x("//div[@id=\"user-dropdown\"]").shouldBe(enabled);
     }
 
-    void checkErrorAuthtorization() {
+    void checkErrorAuthorization() {
         $("div.panel-body").shouldHave(text("Invalid Email or password."));
     }
 
@@ -75,15 +76,15 @@ public class TestConfig {
         $x("//div[@class=\"pwd-lost-q show\"]/a").click();
         $("div.form-group input#user_email").setValue(testEmail);
         $x("//form[@class=\"simple_form form-inline\"]/input[@data-disable-with=\"Create User\"]").click();
-        if (correctEmail) {
-
+        if (correctEmail && firstRestore) {
+            $("div.panel-body").shouldHave(text("You will receive an email with instructions on how to reset your password in a few minutes."));
+            firstRestore = false;
+        } else if (correctEmail) {
+            $("div.panel-body").shouldHave(text("You have recently requested password recovery. Please try again later"));
+        } else if (testEmail == null) {
+            $("div.panel-body").shouldHave(text("Email can't be blank"));
         } else {
-
+            $("div.panel-body").shouldHave(text("Email not found"));
         }
-
-
     }
-
 }
-
-
