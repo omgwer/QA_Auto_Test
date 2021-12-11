@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class AuthorizationTesting implements IRetryAnalyzer {
     private int retryCount = 0;
-    private final int maxRetryCount = 1;
+    private int maxRetryCount = 1;
 
     public boolean retry(ITestResult result) {
         if (retryCount < maxRetryCount) {

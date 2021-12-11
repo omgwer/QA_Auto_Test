@@ -24,7 +24,7 @@ public class TestConfig {
     }
 
     void setSearchCityField(String city) {
-        $x("//input[@placeholder=\"Search city\"]").setValue(city);
+        $("input[placeholder=\"Search city\"]").setValue(city);
     }
 
     void searchCity() {
@@ -44,7 +44,7 @@ public class TestConfig {
     }
 
     void getCurrentTemp(String type, String city) {
-        SelenideElement element = $x("//div[@class=\"current-temp\"]/span[@class=\"heading\"]");
+        SelenideElement element = $("div.current-temp span.heading");
         if (type.equals("Imperial")) {
             element.shouldHave(text("°F"));
             System.out.println(city + " = " + element.text());

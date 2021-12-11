@@ -33,7 +33,7 @@ public class TestConfig {
     }
 
     SelenideElement getLoginButton() {
-        return $x("//li[@class=\"user-li\"]/a");
+        return $("li.user-li a");
     }
 
     SelenideElement getEntryFieldEmail() {
@@ -45,11 +45,11 @@ public class TestConfig {
     }
 
     SelenideElement getCreateUserButton() {
-        return $x("//form/input[@data-disable-with='Create User']");
+        return $("input[data-disable-with=\"Create User\"]");
     }
 
     void checkSuccessAuthorization() {
-        $x("//div[@id=\"user-dropdown\"]").shouldBe(enabled);
+        $("div#user-dropdown").shouldBe(enabled);
     }
 
     void checkErrorAuthorization() {
@@ -61,21 +61,21 @@ public class TestConfig {
         $("#user_remember_me").shouldHave(checked);
         $("#user_remember_me").click();
         $("#user_remember_me").shouldNotHave(checked);
-        $x("//label[@for=\"user_remember_me\"]").click();
+        $("label[for=\"user_remember_me\"]").click();
         $("#user_remember_me").shouldHave(checked);
-        $x("//label[@for=\"user_remember_me\"]").click();
+        $("label[for=\"user_remember_me\"]").click();
         $("#user_remember_me").shouldNotHave(checked);
     }
 
     void linkTest() {
-        $x("//div[@class=\"sign-form\"]/p/a").click();
+        $("a[href=\"/users/sign_up\"]").click();
         webdriver().shouldHave(url("https://home.openweathermap.org/users/sign_up"));
     }
 
     void restorePasswordTest(String testEmail, boolean correctEmail) {
-        $x("//div[@class=\"pwd-lost-q show\"]/a").click();
+        $("div.pwd-lost-q a").click();
         $("div.form-group input#user_email").setValue(testEmail);
-        $x("//form[@class=\"simple_form form-inline\"]/input[@data-disable-with=\"Create User\"]").click();
+        $("form.form-inline input[data-disable-with=\"Create User\"]").click();
         if (correctEmail && firstRestore) {
             $("div.panel-body").shouldHave(text("You will receive an email with instructions on how to reset your password in a few minutes."));
             firstRestore = false;
