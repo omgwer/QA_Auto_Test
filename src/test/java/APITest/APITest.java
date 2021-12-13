@@ -12,7 +12,7 @@ public class APITest {
     @Test
     public void getTemperature() {
         String res = given()
-                .when().get("https://api.openweathermap.org/data/2.5/weather?q=" + currentCity + "&appid="+ apiKey + "&units=" + metricSystem)
+                .when().get("https://api.openweathermap.org/data/2.5/weather?q=" + currentCity + "&appid=" + apiKey + "&units=" + metricSystem)
                 .then().assertThat()
                 .statusCode(200)
                 .extract().jsonPath().getString("main.temp");
